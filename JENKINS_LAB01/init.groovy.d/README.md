@@ -1,10 +1,8 @@
-What is Groovy?
-Groovy is a powerful, dynamic scripting language for the Java platform.
+##What is Groovy?
+###Groovy is a powerful, dynamic scripting language for the Java platform.
 
 It’s very similar to Java in syntax.
-
 But it’s easier and more flexible — you write less code to do more.
-
 Jenkins is built on Java, so Groovy works natively with it.
 
 What is a Groovy script?
@@ -60,7 +58,7 @@ Update configs
 
 Automate something ad-hoc
 
-📦 Why Use Groovy Scripts in Your Case?
+Why Use Groovy Scripts in Your Case?
 You're doing a Dockerized Jenkins setup, so:
 
 You use Groovy scripts in init.groovy.d/ to make Jenkins:
