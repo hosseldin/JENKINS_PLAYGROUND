@@ -17,7 +17,7 @@ if (jenkins.getItem(jobName) == null) {
     def job = jenkins.createProject(FreeStyleProject, jobName)
     
     // Configure Git source (replace with your actual repo URL)
-    job.setScm(new GitSCM("https://github.com/YOUR_USERNAME/YOUR_PRIVATE_REPO.git"))
+    job.setScm(new GitSCM("https://github.com/hosseldin/CICD_APPS.git"))
     
     // Define shell commands to run in the build step
     def shellBuilder = new Shell("""
