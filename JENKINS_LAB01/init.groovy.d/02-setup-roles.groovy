@@ -22,11 +22,11 @@ def permissions = [
 // Create a new role named "read-only" with those permissions
 strategy.addRole(RoleBasedAuthorizationStrategy.GLOBAL, new Role("read-only", permissions))
 
-// Assign the "read-only" role to user 'devuser'
+// Assign the "read-only" role to a user u created 
 strategy.assignRole(
   RoleBasedAuthorizationStrategy.GLOBAL,
   strategy.getRoleMap(RoleBasedAuthorizationStrategy.GLOBAL).getRole("read-only"),
-  "devuser"
+  "hosa-docker"
 )
 
 // Save the configuration
