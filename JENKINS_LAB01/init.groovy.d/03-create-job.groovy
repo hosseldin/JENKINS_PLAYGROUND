@@ -8,7 +8,7 @@ import hudson.plugins.git.*
 def jenkins = Jenkins.getInstance()
 
 // Define a job name
-def jobName = "hello-world-job"
+def jobName = "hosa-job01"
 
 // Only create the job if it doesn't already exist
 if (jenkins.getItem(jobName) == null) {
