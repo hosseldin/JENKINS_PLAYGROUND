@@ -1,0 +1,18 @@
+# Define the version of the Docker Compose file format
+version: '3.8'
+
+services:
+  # Define the Jenkins service
+  jenkins:
+    image: jenkins/jenkins:lts  # Use the Long-Term Support (LTS) version of Jenkins
+    container_name: jenkins     # Name the container 'jenkins' for easier reference
+    ports:
+      - "8080:8080"             # Expose Jenkins web interface on localhost:8080
+      - "50000:50000"           # Port for Jenkins agents to connect (used for distributed builds)
+    volumes:
+      - jenkins_data:/var/jenkins_home  # Persist Jenkins home directory (job configs, plugins, etc.)
+      - /var/run/docker.sock:/var/run/docker.sock  # Allow Jenkins to communicate with host Docker daemon
+
+# Define named volumes (for data persistence)
+volumes:
+  jenkins_data:  # Named volume to persist Jenkins data across container restarts
