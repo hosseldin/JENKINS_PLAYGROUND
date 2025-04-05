@@ -1,5 +1,5 @@
-##What is Groovy?
-###Groovy is a powerful, dynamic scripting language for the Java platform.
+## What is Groovy?
+### Groovy is a powerful, dynamic scripting language for the Java platform.
 
 It’s very similar to Java in syntax.
 But it’s easier and more flexible — you write less code to do more.
