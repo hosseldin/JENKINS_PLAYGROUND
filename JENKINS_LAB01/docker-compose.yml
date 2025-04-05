@@ -4,7 +4,7 @@ version: '3.8'
 services:
   # Define the Jenkins service
   jenkins:
-    image: jenkins/jenkins:lts  # Use the Long-Term Support (LTS) version of Jenkins
+    build: .
     container_name: jenkins     # Name the container 'jenkins' for easier reference
     ports:
       - "8080:8080"             # Expose Jenkins web interface on localhost:8080
