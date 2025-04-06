@@ -5,7 +5,7 @@ FROM jenkins/jenkins:lts
 # Jenkins will use this list to install the specified plugins
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 
-# Install all plugins listed in plugins.txt using the Jenkins plugin CLI
+# Install all plugins listed in plugins.txt using the Jenkins plugin CLI feature
 RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt
 
 # Copy Groovy init scripts into Jenkins initialization directory
