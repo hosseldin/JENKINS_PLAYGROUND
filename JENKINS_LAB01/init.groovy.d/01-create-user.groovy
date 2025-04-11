@@ -22,6 +22,9 @@ def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
 strategy.setAllowAnonymousRead(false)
 instance.setAuthorizationStrategy(strategy)
 
+// 🔥 Disable CSRF crumb protection
+instance.setCrumbIssuer(null)
+
 // Save the Jenkins configuration changes to disk
 instance.save()
 
