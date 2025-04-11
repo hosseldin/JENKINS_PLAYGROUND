@@ -17,3 +17,10 @@ services:
 # Define named volumes (for data persistence)
 volumes:
   jenkins_data:  # Named volume to persist Jenkins data across container restarts
+
+# Jenkins inside the container runs on port 8080
+# Your host (Ubuntu) exposes port 8085 to the outside world (your browser, etc.)
+# So when you go to http://localhost:8085, Docker forwards the traffic to Jenkins inside the container on port 8080
+# Why use a different host port?
+# Because your native Jenkins install on Ubuntu already uses 8080 — so you can't use the same port for both. Ports on the host must be unique.
+# If you tried to use - "8080:8080" for the Docker container, it would conflict with the native Jenkins running on your machine.
