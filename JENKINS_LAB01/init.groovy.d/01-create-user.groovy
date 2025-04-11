@@ -5,6 +5,9 @@ import hudson.security.*
 // Get the Jenkins instance
 def instance = Jenkins.getInstance()
 
+// Skip setup wizard
+instance.setInstallState(InstallState.INITIAL_SETUP_COMPLETED)
+
 // Create a new security realm that allows managing users inside Jenkins (not external like LDAP)
 def hudsonRealm = new HudsonPrivateSecurityRealm(false)
 
