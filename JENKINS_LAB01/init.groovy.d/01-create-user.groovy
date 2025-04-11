@@ -17,14 +17,17 @@ hudsonRealm.createAccount("hosa01", "1234")
 // Set this realm (user system) on Jenkins
 instance.setSecurityRealm(hudsonRealm)
 
-// Use Matrix Authorization Strategy
-def strategy = new GlobalMatrixAuthorizationStrategy()
-
-// Grant Overall/Administer permission to the user 'hosa01'
-strategy.add(Jenkins.ADMINISTER, "hosa01")
-
-// Apply the authorization strategy
+// Authorization
+def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
+strategy.setAllowAnonymousRead(false)
 instance.setAuthorizationStrategy(strategy)
 
 // Save the Jenkins configuration changes to disk
 instance.save()
+
+// Use Matrix Authorization Strategy
+// def strategy = new GlobalMatrixAuthorizationStrategy()
+// Grant Overall/Administer permission to the user 'hosa01'
+// strategy.add(Jenkins.ADMINISTER, "hosa01")
+// Apply the authorization strategy
+// instance.setAuthorizationStrategy(strategy)
