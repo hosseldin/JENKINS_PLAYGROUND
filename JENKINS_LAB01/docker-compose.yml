@@ -7,7 +7,7 @@ services:
     build: .
     container_name: jenkins     # Name the container 'jenkins' for easier reference
     ports:
-      - "8085:8085"             # Expose Jenkins web interface on localhost:8080
+      - "8085:8080"             # Expose Jenkins on the Container "8080" to the host web interface on localhost:8085
       - "50000:50000"           # Port for Jenkins agents to connect (used for distributed builds)
     volumes:
       - jenkins_data:/var/jenkins_home  # Persist Jenkins home directory (job configs, plugins, etc.)
