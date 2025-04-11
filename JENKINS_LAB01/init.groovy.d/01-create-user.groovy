@@ -8,7 +8,7 @@ def instance = Jenkins.getInstance()
 // Create a new security realm that allows managing users inside Jenkins (not external like LDAP)
 def hudsonRealm = new HudsonPrivateSecurityRealm(false)
 
-// Create a new user with username 'devuser' and password 'password123'
+// Create a new user with username 'hosa-docker' and password '1234'
 hudsonRealm.createAccount("hosa-docker", "1234")
 
 // Set this realm (user system) on Jenkins
