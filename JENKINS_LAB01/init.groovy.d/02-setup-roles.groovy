@@ -26,7 +26,7 @@ strategy.addRole(RoleBasedAuthorizationStrategy.GLOBAL, new Role("read-only", pe
 strategy.assignRole(
   RoleBasedAuthorizationStrategy.GLOBAL,
   strategy.getRoleMap(RoleBasedAuthorizationStrategy.GLOBAL).getRole("read-only"),
-  "hosa-docker"
+  "hosa01"
 )
 
 // Save the configuration
