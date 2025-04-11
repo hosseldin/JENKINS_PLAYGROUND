@@ -1,5 +1,4 @@
 # Define the version of the Docker Compose file format
-# version: '3.8'
 
 services:
   # Define the Jenkins service
@@ -12,8 +11,7 @@ services:
     volumes:
       - jenkins_data:/var/jenkins_home  # Persist Jenkins home directory (job configs, plugins, etc.)
       - /var/run/docker.sock:/var/run/docker.sock  # Allow Jenkins to communicate with host Docker daemon
-    environment:
-      JAVA_OPTS: -Djenkins.install.runSetupWizard=false
+
     user: root  # To avoid permission issues when Jenkins interacts with host
 
 # Define named volumes (for data persistence)
