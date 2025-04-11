@@ -14,13 +14,13 @@ hudsonRealm.createAccount("hosa01", "1234")
 // Set this realm (user system) on Jenkins
 instance.setSecurityRealm(hudsonRealm)
 
-// Set the authorization strategy:
-// This one gives full control to any logged-in user
-// and disables anonymous read access
-def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
-strategy.setAllowAnonymousRead(false) // Optional: block anonymous users from reading Jenkins
+// Use Matrix Authorization Strategy
+def strategy = new GlobalMatrixAuthorizationStrategy()
 
-// Apply the authorization strategy to the Jenkins instance
+// Grant Overall/Administer permission to the user 'hosa01'
+strategy.add(Jenkins.ADMINISTER, "hosa01")
+
+// Apply the authorization strategy
 instance.setAuthorizationStrategy(strategy)
 
 // Save the Jenkins configuration changes to disk
