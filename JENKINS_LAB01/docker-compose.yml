@@ -1,5 +1,5 @@
 # Define the version of the Docker Compose file format
-version: '3.8'
+# version: '3.8'
 
 services:
   # Define the Jenkins service
@@ -7,7 +7,7 @@ services:
     build: .
     container_name: jenkins     # Name the container 'jenkins' for easier reference
     ports:
-      - "8080:8080"             # Expose Jenkins web interface on localhost:8080
+      - "8085:8085"             # Expose Jenkins web interface on localhost:8080
       - "50000:50000"           # Port for Jenkins agents to connect (used for distributed builds)
     volumes:
       - jenkins_data:/var/jenkins_home  # Persist Jenkins home directory (job configs, plugins, etc.)
