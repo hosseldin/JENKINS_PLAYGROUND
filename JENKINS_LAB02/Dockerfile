@@ -1,5 +1,5 @@
-# Use the official Jenkins LTS (Long-Term Support) Docker image as the base
-FROM jenkins/jenkins:lts
+# Jenkins Image for the Jenkins Agent
+FROM jenkins/inbound-agent:latest-jdk11
 
 USER root
 
