@@ -1,17 +1,15 @@
 
 services:
   jenkins-agent:
-    # Build the image from the custom Dockerfile named Dockerfile.agent
-    build:
+    build: # Build the image from the default Dockerfile 
       context: .
 
-    # Set the container name
-    container_name: jenkins-agent
+    container_name: jenkins-agent     # Set the container name
 
-    # Environment variables required for the agent to connect to Jenkins master
+    # Env variables required for the agent to connect to Jenkins master
     environment:
-      # URL of the Jenkins master (adjust host if not on the same machine)
-      - JENKINS_URL=http://host.docker.internal:8080/
+      # URL of the Jenkins master container
+      - JENKINS_URL=http://host.docker.internal:8085/
 
       # Work directory inside the container for the agent
       - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
@@ -20,7 +18,7 @@ services:
       - JENKINS_SECRET=your-agent-secret
 
       # Name of the agent (must match what you configured on the master)
-      - JENKINS_NAME=agent-01
+      - JENKINS_NAME=hosa-jenkins-agent01
 
     # Mount Docker socket to allow this agent to run Docker commands on the host
     volumes:
