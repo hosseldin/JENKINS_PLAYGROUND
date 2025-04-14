@@ -1,22 +1,34 @@
-# Define the version of the Docker Compose file format
 
 services:
-  # Define the Jenkins service
-  jenkins:
-    build: .
-    container_name: jenkins     # Name the container 'jenkins' for easier reference
-    ports:
-      - "8085:8080"             # Expose Jenkins on the Container "8080" to the host web interface on localhost:8085
-      - "50000:50000"           # Port for Jenkins agents to connect (used for distributed builds)
+  jenkins-agent:
+    # Build the image from the custom Dockerfile named Dockerfile.agent
+    build:
+      context: .
+
+    # Set the container name
+    container_name: jenkins-agent
+
+    # Environment variables required for the agent to connect to Jenkins master
+    environment:
+      # URL of the Jenkins master (adjust host if not on the same machine)
+      - JENKINS_URL=http://host.docker.internal:8080/
+
+      # Work directory inside the container for the agent
+      - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
+
+      # Secret/token generated when creating the agent on Jenkins master
+      - JENKINS_SECRET=your-agent-secret
+
+      # Name of the agent (must match what you configured on the master)
+      - JENKINS_NAME=agent-01
+
+    # Mount Docker socket to allow this agent to run Docker commands on the host
     volumes:
-      - jenkins_data:/var/jenkins_home  # Persist Jenkins home directory (job configs, plugins, etc.)
-      - /var/run/docker.sock:/var/run/docker.sock  # Allow Jenkins to communicate with host Docker daemon
+      - /var/run/docker.sock:/var/run/docker.sock
 
-    user: root  # To avoid permission issues when Jenkins interacts with host
+    # Restart the container automatically unless explicitly stopped
+    restart: unless-stopped
 
-# Define named volumes (for data persistence)
-volumes:
-  jenkins_data:  # Named volume to persist Jenkins data across container restarts
 
 # Jenkins inside the container runs on port 8080
 # Your host (Ubuntu) exposes port 8085 to the outside world (your browser, etc.)
