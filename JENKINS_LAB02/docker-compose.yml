@@ -1,0 +1,26 @@
+# Define the version of the Docker Compose file format
+
+services:
+  # Define the Jenkins service
+  jenkins:
+    build: .
+    container_name: jenkins     # Name the container 'jenkins' for easier reference
+    ports:
+      - "8085:8080"             # Expose Jenkins on the Container "8080" to the host web interface on localhost:8085
+      - "50000:50000"           # Port for Jenkins agents to connect (used for distributed builds)
+    volumes:
+      - jenkins_data:/var/jenkins_home  # Persist Jenkins home directory (job configs, plugins, etc.)
+      - /var/run/docker.sock:/var/run/docker.sock  # Allow Jenkins to communicate with host Docker daemon
+
+    user: root  # To avoid permission issues when Jenkins interacts with host
+
+# Define named volumes (for data persistence)
+volumes:
+  jenkins_data:  # Named volume to persist Jenkins data across container restarts
+
+# Jenkins inside the container runs on port 8080
+# Your host (Ubuntu) exposes port 8085 to the outside world (your browser, etc.)
+# So when you go to http://localhost:8085, Docker forwards the traffic to Jenkins inside the container on port 8080
+# Why use a different host port?
+# Because your native Jenkins install on Ubuntu already uses 8080 — so you can't use the same port for both. Ports on the host must be unique.
+# If you tried to use - "8080:8080" for the Docker container, it would conflict with the native Jenkins running on your machine.
