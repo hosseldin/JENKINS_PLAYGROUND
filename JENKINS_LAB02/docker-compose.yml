@@ -15,7 +15,7 @@ services:
       - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
 
       # Secret/token generated when creating the agent on Jenkins master
-      - JENKINS_SECRET=your-agent-secret
+      - JENKINS_SECRET=43399ec75c0e7f15496a721806a8d8be8f66c3d7a5400ce37bfbe8c63
 
       # Name of the agent (must match what you configured on the master)
       - JENKINS_NAME=hosa-jenkins-agent01
