@@ -16,9 +16,9 @@ services:
 
     jenkins-agent:
         build:
-            context: ./jenkins-agent # Build the image from the default Dockerfile
+            context: ./jenkins-agent01 # Build the image from the default Dockerfile
             dockerfile: Dockerfile
-        container_name: jenkins-agent
+        container_name: jenkins-agent01
         depends_on:
             - jenkins-master
         environment:
