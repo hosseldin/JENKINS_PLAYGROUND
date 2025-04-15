@@ -21,7 +21,8 @@ services:
         container_name: jenkins-agent01
         depends_on:
             - jenkins-master
-        expose: 22
+        expose:
+            - 22
         environment:
             # Env variables required for the agent to connect to Jenkins master
             - JENKINS_URL=http://jenkins-master:8085/ # URL of the Jenkins master container
