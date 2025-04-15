@@ -15,9 +15,9 @@ RUN apt-get update && apt-get install -y \
     sudo \
     && apt-get clean
 
-RUN usermod -aG docker jenkins-master
+RUN usermod -aG docker jenkins
 
-USER jenkins-master
+USER jenkins
 
 
 
