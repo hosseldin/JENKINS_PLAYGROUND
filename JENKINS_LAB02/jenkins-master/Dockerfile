@@ -6,7 +6,7 @@ USER root
 # Install Docker CLI
 RUN apt-get update && \
     apt-get install -y docker.io && \
-    usermod -aG docker jenkins
+    usermod -aG docker jenkins-master
 
 USER jenkins-master
 
