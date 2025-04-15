@@ -25,8 +25,8 @@ services:
             # Env variables required for the agent to connect to Jenkins master
             - JENKINS_URL=http://jenkins-master:8085/ # URL of the Jenkins master container
             - JENKINS_AGENT_WORKDIR=/home/jenkins/agent # Work directory inside the container for the agent
-            - JENKINS_SECRET=43399ec75c0e7f15496a721806a8d8be8f66c3d7a5400ce37bfbe8c63 # Secret/token generated when creating the agent on Jenkins master
-            - JENKINS_NAME=hosa-jenkins-agent01 # Name of the agent (must match what you configured on the master)
+            - JENKINS_SECRET=8ab2e24c719fa50a806e10558f08c47e66e7e82021f1858cb5505614a641e906 # Secret/token generated when creating the agent on Jenkins master
+            - JENKINS_NAME=hosa-agent01 # Name of the agent (must match what you configured on the master)
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock # Mount Docker socket to allow this agent to run Docker commands on the host
         networks:
