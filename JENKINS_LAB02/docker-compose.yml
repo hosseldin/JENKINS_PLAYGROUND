@@ -36,6 +36,8 @@ services:
 volumes:
     # Define named volumes (for data persistence)
     jenkins_data:
+
+
 networks:
     jenkins-net:
         driver: bridge
