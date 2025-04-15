@@ -5,6 +5,7 @@ USER root
 
 # Install Docker CLI
 RUN apt-get update && apt-get install -y \
+    openssh-server \
     curl \
     git \
     docker.io \
@@ -13,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     iputils-ping \
     unzip \
     sudo \
+    passwd \
     && apt-get clean
 
 RUN usermod -aG docker jenkins
