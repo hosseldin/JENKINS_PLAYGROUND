@@ -21,7 +21,20 @@ RUN usermod -aG docker jenkins
 
 USER jenkins
 
+# Create SSH directory and configure
+RUN mkdir /var/run/sshd
 
+# Optionally set root password (for debugging; not recommended in production)
+RUN echo "root:1234" | chpasswd
+
+# Allow root login via SSH (again, not recommended for production; use keys!)
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# Expose SSH port
+EXPOSE 22
+
+# Start the SSH service
+CMD ["/usr/sbin/sshd", "-D"]
 
 
 
