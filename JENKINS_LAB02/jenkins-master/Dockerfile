@@ -4,9 +4,18 @@ FROM jenkins/jenkins:lts
 USER root
 
 # Install Docker CLI
-RUN apt-get update && \
-    apt-get install -y docker.io && \
-    usermod -aG docker jenkins-master
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    docker.io \
+    vim \
+    net-tools \
+    iputils-ping \
+    unzip \
+    sudo \
+    && apt-get clean
+
+RUN usermod -aG docker jenkins-master
 
 USER jenkins-master
 
