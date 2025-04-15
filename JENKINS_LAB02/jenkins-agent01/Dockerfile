@@ -1,5 +1,5 @@
 # Jenkins Image for the Jenkins Agent
-FROM jenkins/inbound-agent:latest-jdk11
+FROM jenkins/ssh-agent:jdk11
 
 USER root
 

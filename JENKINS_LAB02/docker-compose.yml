@@ -6,7 +6,7 @@ services:
         container_name: jenkins-master # Name the container 'jenkins' for easier reference
         ports:
             - "8085:8080" # Expose Jenkins on the Container "8080" to the host web interface on localhost:8085
-            - "50000:50000" # Port for Jenkins agents to connect (used for distributed builds)
+            - "50005:50000" # Port for Jenkins agents to connect (used for distributed builds)
         volumes:
             - jenkins_data:/var/jenkins_data # Persist Jenkins home directory (job configs, plugins, etc.)
             - /var/run/docker.sock:/var/run/docker.sock # Allow Jenkins to communicate with host Docker daemon
@@ -21,6 +21,7 @@ services:
         container_name: jenkins-agent01
         depends_on:
             - jenkins-master
+        expose: 22
         environment:
             # Env variables required for the agent to connect to Jenkins master
             - JENKINS_URL=http://jenkins-master:8085/ # URL of the Jenkins master container
@@ -31,7 +32,7 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock # Mount Docker socket to allow this agent to run Docker commands on the host
         networks:
             - jenkins-net
-        restart: unless-stopped # Restart the container automatically unless explicitly stopped
+        user: root # To avoid permission issues when Jenkins interacts with host
 
 volumes:
     # Define named volumes (for data persistence)
