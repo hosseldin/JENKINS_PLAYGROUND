@@ -17,9 +17,9 @@ RUN apt-get update && apt-get install -y \
     passwd \
     && apt-get clean
 
-RUN usermod -aG docker jenkins
+# RUN usermod -aG docker jenkins
 
-USER jenkins
+# USER jenkins
 
 # Create SSH directory and configure
 RUN mkdir /var/run/sshd
