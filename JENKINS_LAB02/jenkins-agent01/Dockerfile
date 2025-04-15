@@ -52,6 +52,9 @@ RUN mkdir -p /var/run/sshd \
     # Change ownership of the entire .ssh folder and its contents to 'jenkins'
     && chown -R jenkins:jenkins /home/jenkins/.ssh
 
+# # Expose SSH port
+# EXPOSE 22
+
 # Start the sshd daemon in the foreground
 CMD ["/usr/sbin/sshd", "-D"]
 #  the option -D is important because if the main process from the CMD or ENTRYPOINT
@@ -63,5 +66,3 @@ CMD ["/usr/sbin/sshd", "-D"]
 # # Allow root login via SSH (again, not recommended for production; use keys!)
 # RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-# # Expose SSH port
-# EXPOSE 22
