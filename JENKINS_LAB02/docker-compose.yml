@@ -10,7 +10,8 @@ services:
         volumes:
             - jenkins_data:/var/jenkins_home # Persist Jenkins home directory (job configs, plugins, etc.)
             - /var/run/docker.sock:/var/run/docker.sock # Allow Jenkins to communicate with host Docker daemon
-        networks: jenkins-net
+        networks:
+            - jenkins-net
         user: root # To avoid permission issues when Jenkins interacts with host
 
     jenkins-agent:
@@ -22,12 +23,14 @@ services:
             - jenkins-master
         environment:
             # Env variables required for the agent to connect to Jenkins master
-            - JENKINS_URL=http://host.docker.internal:8085/ # URL of the Jenkins master container
+            - JENKINS_URL=http://jenkins-master:8085/ # URL of the Jenkins master container
             - JENKINS_AGENT_WORKDIR=/home/jenkins/agent # Work directory inside the container for the agent
             - JENKINS_SECRET=43399ec75c0e7f15496a721806a8d8be8f66c3d7a5400ce37bfbe8c63 # Secret/token generated when creating the agent on Jenkins master
             - JENKINS_NAME=hosa-jenkins-agent01 # Name of the agent (must match what you configured on the master)
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock # Mount Docker socket to allow this agent to run Docker commands on the host
+        networks:
+            - jenkins-net
         restart: unless-stopped # Restart the container automatically unless explicitly stopped
 
 volumes:
