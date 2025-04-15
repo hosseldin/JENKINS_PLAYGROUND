@@ -1,19 +1,18 @@
-# Jenkins Image for the Jenkins Agent
-FROM jenkins/ssh-agent:jdk11
+# In this lab, I will use a different approach, I will not use an ready image,
+# I will use the official Ubuntu image and install the necessary packages
+FROM ubuntu:22.04
 
-USER root
-
-# Install Docker CLI
+# Install necessary packages
 RUN apt-get update && apt-get install -y \
+    sudo \
     openssh-server \
+    openjdk-17-jdk \
     curl \
     git \
     docker.io \
-    vim \
     net-tools \
     iputils-ping \
     unzip \
-    sudo \
     passwd \
     && apt-get clean
 

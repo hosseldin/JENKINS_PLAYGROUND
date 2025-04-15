@@ -1,5 +1,5 @@
 # Use the official Jenkins LTS (Long-Term Support) Docker image as the base
-FROM jenkins/jenkins:lts-jdk11
+FROM jenkins/jenkins:lts
 
 USER root
 
@@ -9,7 +9,6 @@ RUN apt-get update && apt-get install -y \
     curl \
     git \
     docker.io \
-    vim \
     net-tools \
     iputils-ping \
     unzip \
