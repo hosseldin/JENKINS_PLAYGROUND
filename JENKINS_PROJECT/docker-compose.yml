@@ -1,0 +1,51 @@
+services:
+    jenkins-master:
+        build:
+            context: ./jenkins-master
+            dockerfile: Dockerfile
+        container_name: jenkins-master # Name the container 'jenkins' for easier reference
+        ports:
+            - "8085:8080" # Expose Jenkins on the Container "8080" to the host web interface on localhost:8085
+            - "50005:50000" # Port for Jenkins agents to connect (used for distributed builds)
+        volumes:
+            - jenkins_data:/var/jenkins_data # Persist Jenkins home directory (job configs, plugins, etc.)
+            - /var/run/docker.sock:/var/run/docker.sock # Allow Jenkins to communicate with host Docker daemon
+        networks:
+            - jenkins-net
+        user: root # To avoid permission issues when Jenkins interacts with host
+
+    jenkins-agent:
+        build:
+            context: ./jenkins-agent01 # Build the image from the default Dockerfile
+            dockerfile: Dockerfile
+        container_name: jenkins-agent01
+        depends_on:
+            - jenkins-master
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock # Mount Docker socket to allow this agent to run Docker commands on the host
+        networks:
+            - jenkins-net
+        user: root # To avoid permission issues when Jenkins interacts with host
+
+volumes:
+    # Define named volumes (for data persistence)
+    jenkins_data:
+networks:
+    jenkins-net:
+        driver: bridge
+        # Jenkins inside the container runs on port 8080
+        # Your host (Ubuntu) exposes port 8085 to the outside world (your browser, etc.)
+        # So when you go to http://localhost:8085, Docker forwards the traffic to Jenkins inside the container on port 8080
+        # Why use a different host port?
+        # Because your native Jenkins install on Ubuntu already uses 8080 — so you can't use the same port for both. Ports on the host must be unique.
+        # If you tried to use - "8080:8080" for the Docker container, it would conflict with the native Jenkins running on your machine.
+
+
+        # expose:
+        #     - 22
+        # environment:
+        #     # Env variables required for the agent to connect to Jenkins master
+        #     - JENKINS_URL=http://jenkins-master:8085/ # URL of the Jenkins master container
+        #     - JENKINS_AGENT_WORKDIR=/home/jenkins/agent # Work directory inside the container for the agent
+        #     - JENKINS_SECRET=8ab2e24c719fa50a806e10558f08c47e66e7e82021f1858cb5505614a641e906 # Secret/token generated when creating the agent on Jenkins master
+        #     - JENKINS_NAME=hosa-agent01 # Name of the agent (must match what you configured on the master)
